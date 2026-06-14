@@ -127,6 +127,18 @@
   /* ingredients */
   .ingredients{max-width:1280px;margin:0 auto clamp(50px,7vw,90px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 0}
   .ingredients .lbl{font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--paprika);margin-bottom:18px}
+  /* ingredient photo strip */
+  .ing-photos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px}
+  @media(min-width:760px){.ing-photos{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px}}
+  .ing-photos figure{position:relative;border-radius:3px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:5/4;background:#000;margin:0}
+  .ing-photos img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+  .ing-photos figure:hover img{transform:scale(1.06)}
+  .ing-photos figcaption{
+    position:absolute;left:0;bottom:0;right:0;
+    font-family:"Fraunces",serif;font-size:.95rem;letter-spacing:.02em;
+    color:var(--cream);padding:28px 16px 12px;
+    background:linear-gradient(to top,rgba(20,10,6,.78),transparent);
+  }
   .chips{display:flex;flex-wrap:wrap;gap:10px}
   .chip{
     font-size:.92rem;padding:8px 16px;border:1px solid var(--line);border-radius:40px;
@@ -177,6 +189,38 @@
   .finish .k{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:var(--paprika)}
   .finish p{font-family:"Fraunces",serif;font-style:italic;font-weight:300;font-size:clamp(1.5rem,3.5vw,2.6rem);line-height:1.3;max-width:22ch;margin:1rem auto 0}
 
+  /* ---------- NOKEDLI SIDE CARD ---------- */
+  .recipe.side{background:var(--cream-soft);padding-block:clamp(60px,8vw,120px)}
+  .side-card{
+    max-width:1040px;margin:0 auto;background:var(--cream);
+    border:1px solid var(--line);border-radius:4px;
+    box-shadow:var(--shadow);overflow:hidden;
+    position:relative;
+  }
+  .side-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(var(--paprika),var(--ember))}
+  .side-head{padding:clamp(34px,5vw,60px) clamp(28px,5vw,64px) 0}
+  .side-head .index{font-family:"Fraunces",serif;font-size:.95rem;color:var(--paprika);letter-spacing:.16em;text-transform:uppercase;margin-bottom:1rem}
+  .side-head h2{font-family:"Fraunces",serif;font-weight:300;font-size:clamp(2.6rem,7vw,5rem);line-height:.95;letter-spacing:-.02em}
+  .side-head h2 em{font-style:italic;color:var(--paprika)}
+  .side-head p{margin-top:1.1rem;max-width:54ch;font-size:1.06rem;line-height:1.7;color:var(--ink-soft)}
+  .side-head .serves{display:inline-block;margin-top:1.3rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--paprika);border:1px solid var(--line);padding:7px 14px;border-radius:40px}
+  .side-grid{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,56px);padding:clamp(30px,4vw,52px) clamp(28px,5vw,64px) clamp(38px,5vw,60px)}
+  @media(min-width:760px){.side-grid{grid-template-columns:.8fr 1.2fr}}
+  .side-grid .lbl{font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--paprika);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .side-ing ul{list-style:none}
+  .side-ing li{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:1rem}
+  .side-ing li span{color:var(--ink-soft);font-style:italic;white-space:nowrap}
+  .side-ing li.opt{color:var(--ink-soft)}
+  .side-method ol{list-style:none;counter-reset:nk;display:flex;flex-direction:column;gap:20px}
+  .side-method li{counter-increment:nk;position:relative;padding-left:54px;font-size:1.02rem;line-height:1.65;color:var(--ink-soft)}
+  .side-method li::before{
+    content:counter(nk);position:absolute;left:0;top:-2px;
+    width:34px;height:34px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Fraunces",serif;font-size:1.05rem;color:var(--cream);background:var(--paprika);
+  }
+  .side-method li b{color:var(--ink);font-weight:500}
+
   /* ---------- FOOTER ---------- */
   footer{
     background:var(--char);color:var(--cream-soft);padding:clamp(60px,8vw,110px) clamp(20px,5vw,64px) 50px;
@@ -198,17 +242,19 @@
   <nav>
     <div class="brand"><span class="dot"></span>Paprika&nbsp;&amp;&nbsp;Patience</div>
     <div class="links">
-      <a href="#paprikash">Chicken Paprikash</a>
+      <a href="#paprikash">Paprikash</a>
+      <a href="#nokedli">Nokedli</a>
       <a href="#letcho">Lecsó</a>
+      <a href="#dumpling">Dumplings</a>
       <a class="cta" href="#paprikash">Start Cooking →</a>
     </div>
   </nav>
 
   <header class="hero">
     <div class="hero-tag">Hungarian Home Cooking · Est. Grandma</div>
-    <div class="eyebrow">Two dishes · One red spice</div>
+    <div class="eyebrow">Three dishes · one good side</div>
     <h1>Slow heat,<br>sweet <em>paprika</em>,<br>no rush.</h1>
-    <p class="lede">A small kitchen, a wooden board, a spoonful of Hungarian red paprika folded in off the heat so it never burns. Here are two everyday classics — built step by step, photographed exactly as they were cooked.</p>
+    <p class="lede">A small kitchen, a wooden board, a spoonful of Hungarian red paprika folded in off the heat so it never burns. Three everyday classics — plus the soft little dumplings that go with them — built step by step, photographed exactly as they were cooked.</p>
     <div class="scroll-cue">
       <a class="dish-link" href="#paprikash">
         <span class="num">01</span>
@@ -217,6 +263,14 @@
       <a class="dish-link" href="#letcho">
         <span class="num">02</span>
         <span class="meta"><b>Lecsó</b><span>Peppers · tomato · onion</span></span>
+      </a>
+      <a class="dish-link" href="#dumpling">
+        <span class="num">03</span>
+        <span class="meta"><b>Potato Dumplings</b><span>Riced potato · boiled</span></span>
+      </a>
+      <a class="dish-link" href="#nokedli">
+        <span class="num">+</span>
+        <span class="meta"><b>Nokedli</b><span>The side · egg dumplings</span></span>
       </a>
     </div>
   </header>
@@ -240,6 +294,10 @@
 
     <div class="ingredients reveal">
       <div class="lbl">What you'll need</div>
+      <div class="ing-photos">
+        <figure><img loading="lazy" decoding="async" src="chicken_paprikash/ingredients/onions.jpeg" alt="Fresh onions on the board"><figcaption>Onions — the base of the sauce</figcaption></figure>
+        <figure><img loading="lazy" decoding="async" src="chicken_paprikash/ingredients/chicken-legs.jpeg" alt="Raw chicken legs on a wooden board"><figcaption>Chicken legs, ready to joint</figcaption></figure>
+      </div>
       <div class="chips">
         <span class="chip"><span class="pip"></span>Onion</span>
         <span class="chip"><span class="pip"></span>Chicken legs</span>
@@ -257,29 +315,29 @@
     <div class="steps">
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 01</span><img src="chicken_paprikash/1.jpeg" alt="Chopped onion on a wooden board"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 01</span><img loading="lazy" decoding="async" src="chicken_paprikash/1.jpeg" alt="Chopped onion on a wooden board"></div></div>
         <div class="s-body"><span class="step-no">01</span><h3>Chop the onion</h3>
           <p>Finely chop a good amount of onion — it's the backbone of the whole sauce. Don't be shy with it.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 02</span><img src="chicken_paprikash/2.jpeg" alt="Separating the drumstick from the thigh"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 02</span><img loading="lazy" decoding="async" src="chicken_paprikash/2.jpeg" alt="Separating the drumstick from the thigh"></div></div>
         <div class="s-body"><span class="step-no">02</span><h3>Joint the chicken legs</h3>
           <p>Separate the lower drumstick from the upper thigh at the joint. Cutting them apart helps the pieces cook evenly and fit the pan.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 03</span><img src="chicken_paprikash/5.jpeg" alt="Onions heating in pork fat in a large pot"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 03</span><img loading="lazy" decoding="async" src="chicken_paprikash/5.jpeg" alt="Onions heating in pork fat in a large pot"></div></div>
         <div class="s-body"><span class="step-no">03</span><h3>Sweat onion in pork fat</h3>
           <p>Start heating the chopped onion with a spoon of pork fat in a big pot over medium heat. Let it soften slowly until glassy and translucent.</p>
-          <div class="note"><b>Optional</b>Toss in 1–2 chopped garlic cloves with the onion for extra depth.</div>
+          <div class="note"><b>Optional</b>Add 1–2 cloves of finely chopped garlic to the onion as it softens, for extra depth.</div>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 04</span><img src="chicken_paprikash/6.jpeg" alt="Adding red paprika to glassy onions"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 04</span><img loading="lazy" decoding="async" src="chicken_paprikash/6.jpeg" alt="Adding red paprika to glassy onions"></div></div>
         <div class="s-body"><span class="step-no">04</span><h3>Add the paprika — off the boil</h3>
           <p>Once the onion turns glassy, drop the heat to low and add a tablespoon of Hungarian red paprika.</p>
           <div class="note"><b>Why low heat</b>Paprika scorches in seconds, and burnt paprika turns the whole dish bitter.</div>
@@ -287,42 +345,42 @@
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 05</span><img src="chicken_paprikash/10.jpeg" alt="Mixing the paprika into the onions quickly"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 05</span><img loading="lazy" decoding="async" src="chicken_paprikash/10.jpeg" alt="Mixing the paprika into the onions quickly"></div></div>
         <div class="s-body"><span class="step-no">05</span><h3>Stir it in, fast</h3>
           <p>Mix the paprika through the onions quickly so it coats everything and blooms into the fat without catching.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 06</span><img src="chicken_paprikash/12.jpeg" alt="Adding chicken legs to the pot"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 06</span><img loading="lazy" decoding="async" src="chicken_paprikash/12.jpeg" alt="Adding chicken legs to the pot"></div></div>
         <div class="s-body"><span class="step-no">06</span><h3>Add the chicken legs</h3>
           <p>Nestle the jointed chicken pieces into the paprika-onion base, turning them to coat in the deep red color.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 07</span><img src="chicken_paprikash/13.jpeg" alt="Adding black pepper"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 07</span><img loading="lazy" decoding="async" src="chicken_paprikash/13.jpeg" alt="Adding black pepper"></div></div>
         <div class="s-body"><span class="step-no">07</span><h3>Season with pepper</h3>
           <p>Grind black pepper over the chicken to taste.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 08</span><img src="chicken_paprikash/14.jpeg" alt="Adding a tablespoon of salt"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 08</span><img loading="lazy" decoding="async" src="chicken_paprikash/14.jpeg" alt="Adding a tablespoon of salt"></div></div>
         <div class="s-body"><span class="step-no">08</span><h3>Then the salt</h3>
           <p>Add about a tablespoon of salt — adjust later once the sauce reduces.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 09</span><img src="chicken_paprikash/15.jpeg" alt="Pouring water into the pot"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 09</span><img loading="lazy" decoding="async" src="chicken_paprikash/15.jpeg" alt="Pouring water into the pot"></div></div>
         <div class="s-body"><span class="step-no">09</span><h3>Pour in the water</h3>
           <p>Add 1½ cups of water. It will loosen the paprika base into the braising liquid that becomes your sauce.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 10</span><img src="chicken_paprikash/16.jpeg" alt="Pot covered to simmer"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 10</span><img loading="lazy" decoding="async" src="chicken_paprikash/16.jpeg" alt="Pot covered to simmer"></div></div>
         <div class="s-body"><span class="step-no">10</span><h3>Cover &amp; braise low</h3>
           <p>Put the lid on and let it cook gently for about 1 hour 20 minutes.</p>
           <div class="note"><b>Doneness</b>Test with a fork — the meat should be fork-tender and nearly falling off the bone.</div>
@@ -330,14 +388,14 @@
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 11</span><img src="chicken_paprikash/17.jpeg" alt="Two tablespoons of flour in a bowl"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 11</span><img loading="lazy" decoding="async" src="chicken_paprikash/17.jpeg" alt="Two tablespoons of flour in a bowl"></div></div>
         <div class="s-body"><span class="step-no">11</span><h3>Start the thickener</h3>
           <p>In a separate bowl, measure out 2 tablespoons of flour.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 12</span><img src="chicken_paprikash/18.jpeg" alt="Adding sour cream to the flour"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 12</span><img loading="lazy" decoding="async" src="chicken_paprikash/18.jpeg" alt="Adding sour cream to the flour"></div></div>
         <div class="s-body"><span class="step-no">12</span><h3>Add the sour cream</h3>
           <p>Stir 4 tablespoons of sour cream into the flour.</p>
         </div>
@@ -345,8 +403,8 @@
 
       <article class="step reveal">
         <div class="s-media dual">
-          <div class="frame"><span class="tag">12·a</span><img src="chicken_paprikash/19.jpeg" alt="Adding a little water to the mix"></div>
-          <div class="frame"><img src="chicken_paprikash/19.1.jpeg" alt="Mixing the flour and sour cream smooth"></div>
+          <div class="frame"><span class="tag">12·a</span><img loading="lazy" decoding="async" src="chicken_paprikash/19.jpeg" alt="Adding a little water to the mix"></div>
+          <div class="frame"><img loading="lazy" decoding="async" src="chicken_paprikash/19.1.jpeg" alt="Mixing the flour and sour cream smooth"></div>
         </div>
         <div class="s-body"><span class="step-no">13</span><h3>Loosen &amp; mix smooth</h3>
           <p>Splash in a little water, then whisk the flour and sour cream until completely smooth with no lumps.</p>
@@ -355,8 +413,8 @@
 
       <article class="step reveal">
         <div class="s-media dual">
-          <div class="frame"><span class="tag">Temper</span><img src="chicken_paprikash/20.jpeg" alt="Ladling hot sauce from the pan"></div>
-          <div class="frame"><img src="chicken_paprikash/22.jpeg" alt="Adding hot sauce into the sour cream mix"></div>
+          <div class="frame"><span class="tag">Temper</span><img loading="lazy" decoding="async" src="chicken_paprikash/20.jpeg" alt="Ladling hot sauce from the pan"></div>
+          <div class="frame"><img loading="lazy" decoding="async" src="chicken_paprikash/22.jpeg" alt="Adding hot sauce into the sour cream mix"></div>
         </div>
         <div class="s-body"><span class="step-no">14</span><h3>Temper it with the hot sauce</h3>
           <p>Ladle about 1½ cups of the hot chicken sauce from the pan into the flour–sour cream mix. Warming it gently this way stops the cream from splitting.</p>
@@ -364,14 +422,14 @@
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 15</span><img src="chicken_paprikash/23.jpeg" alt="Mixing the tempered sour cream"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 15</span><img loading="lazy" decoding="async" src="chicken_paprikash/23.jpeg" alt="Mixing the tempered sour cream"></div></div>
         <div class="s-body"><span class="step-no">15</span><h3>Whisk until silky</h3>
           <p>Mix it well until the tempered cream is smooth and warm to the touch.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Finish</span><img src="chicken_paprikash/25.jpeg" alt="Finished chicken paprikash with sour cream sauce"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Finish</span><img loading="lazy" decoding="async" src="chicken_paprikash/25.jpeg" alt="Finished chicken paprikash with sour cream sauce"></div></div>
         <div class="s-body"><span class="step-no">16</span><h3>Return, boil, done</h3>
           <p>Pour the cream back into the pot and stir it through the chicken sauce. Let it boil for 4–5 minutes to thicken — and that's it, dinner's ready.</p>
         </div>
@@ -381,7 +439,43 @@
 
     <div class="finish reveal">
       <div class="k">Serve it with</div>
-      <p>Nokedli, fresh bread, or a spoon of rice to catch every drop of that red sauce.</p>
+      <p><a href="#nokedli" style="color:inherit;text-decoration:underline;text-decoration-color:var(--paprika);text-underline-offset:6px">Nokedli</a>, fresh bread, or a spoon of rice to catch every drop of that red sauce.</p>
+    </div>
+  </section>
+
+  <!-- ============ NOKEDLI (SIDE) ============ -->
+  <section class="recipe side" id="nokedli">
+    <div class="side-card reveal">
+      <div class="side-head">
+        <div class="index">The side · made for the Paprikash</div>
+        <h2><em>Nokedli</em></h2>
+        <p>Soft little Hungarian egg dumplings — the traditional partner for paprikash, scooped straight into that red sour-cream sauce. No special skill needed, just a nokedli maker (or a colander with big holes). No photos for this one, so here's the recipe in full.</p>
+        <span class="serves">Serves 4</span>
+      </div>
+      <div class="side-grid">
+        <div class="side-ing">
+          <div class="lbl">Ingredients</div>
+          <ul>
+            <li>All-purpose flour <span>2 cups · ~250 g</span></li>
+            <li>Large eggs <span>2</span></li>
+            <li>Lukewarm water <span>½–¾ cup</span></li>
+            <li>Salt <span>1 tsp + more for the water</span></li>
+            <li class="opt">Sour cream <span>1–2 tbsp · optional</span></li>
+            <li>Oil or butter <span>1 tbsp · to finish</span></li>
+          </ul>
+        </div>
+        <div class="side-method">
+          <div class="lbl">Method</div>
+          <ol>
+            <li><b>Boil the water.</b> Bring a large pot of heavily salted water to a rolling boil over medium-high heat.</li>
+            <li><b>Make the batter.</b> Whisk the eggs, salt and water (and sour cream, if using) in a large bowl. Gradually mix in the flour until you have a soft, sticky, slightly wet dough — like thick, lumpy pancake batter.</li>
+            <li><b>Form the dumplings.</b> Set a nokedli maker (or Spätzle press, or a large-holed grater) over the boiling water. Pour in a portion of batter and slide it back and forth to push the dough through into the water.</li>
+            <li><b>Cook.</b> The nokedli sink, then float to the surface. Let them boil about 1 minute after they float up.</li>
+            <li><b>Drain &amp; rinse.</b> Lift them out with a slotted spoon, rinse briefly with cold water, drain, and toss with a little oil or melted butter so they don't stick.</li>
+            <li><b>Repeat.</b> Work in batches until all the batter is used up, then pile them next to the paprikash.</li>
+          </ol>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -418,14 +512,14 @@
     <div class="steps">
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 01</span><img src="letcho/1.jpeg" alt="Chopped onion on a board"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 01</span><img loading="lazy" decoding="async" src="letcho/1.jpeg" alt="Chopped onion on a board"></div></div>
         <div class="s-body"><span class="step-no">01</span><h3>Chop the onion</h3>
           <p>Same start as always — chop the onion. It melts down into the sweet base of the stew.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 02</span><img src="letcho/3.jpeg" alt="Chopped peppers"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 02</span><img loading="lazy" decoding="async" src="letcho/3.jpeg" alt="Chopped peppers"></div></div>
         <div class="s-body"><span class="step-no">02</span><h3>Chop the peppers</h3>
           <p>Slice the peppers into strips or chunks.</p>
           <div class="note"><b>Pepper note</b>Try to avoid bell pepper — it tastes noticeably different. Sweet Hungarian (wax) peppers are the real thing here.</div>
@@ -433,21 +527,21 @@
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 03</span><img src="letcho/4.jpeg" alt="Chopped tomato"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 03</span><img loading="lazy" decoding="async" src="letcho/4.jpeg" alt="Chopped tomato"></div></div>
         <div class="s-body"><span class="step-no">03</span><h3>Chop the tomato</h3>
           <p>Roughly chop the tomato and set it aside — it goes in near the end.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 04</span><img src="letcho/5.jpeg" alt="Onion sweating in fat"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 04</span><img loading="lazy" decoding="async" src="letcho/5.jpeg" alt="Onion sweating in fat"></div></div>
         <div class="s-body"><span class="step-no">04</span><h3>Sweat the onion</h3>
           <p>Heat the chopped onion with fat until it turns soft and glassy.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 05</span><img src="letcho/7.jpeg" alt="Adding red paprika"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 05</span><img loading="lazy" decoding="async" src="letcho/7.jpeg" alt="Adding red paprika"></div></div>
         <div class="s-body"><span class="step-no">05</span><h3>Bloom the paprika</h3>
           <p>Add a tablespoon of Hungarian red paprika to the onion.</p>
           <div class="note"><b>Low heat</b>Keep the flame low — paprika burns fast and turns bitter.</div>
@@ -455,42 +549,42 @@
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 06</span><img src="letcho/8.jpeg" alt="Adding chopped peppers to the pot"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 06</span><img loading="lazy" decoding="async" src="letcho/8.jpeg" alt="Adding chopped peppers to the pot"></div></div>
         <div class="s-body"><span class="step-no">06</span><h3>Add the peppers</h3>
           <p>Tip in the chopped peppers and turn them through the paprika onion.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 07</span><img src="letcho/9.jpeg" alt="Adding black pepper"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 07</span><img loading="lazy" decoding="async" src="letcho/9.jpeg" alt="Adding black pepper"></div></div>
         <div class="s-body"><span class="step-no">07</span><h3>Season with pepper</h3>
           <p>Add black pepper to taste (and a pinch of salt if you like).</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 08</span><img src="letcho/10.jpeg" alt="Peppers cooking covered"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 08</span><img loading="lazy" decoding="async" src="letcho/10.jpeg" alt="Peppers cooking covered"></div></div>
         <div class="s-body"><span class="step-no">08</span><h3>Cover &amp; soften</h3>
           <p>Stir, put the lid on, and cook for 20–30 minutes until the peppers go soft and start to collapse.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 09</span><img src="letcho/12.jpeg" alt="Adding chopped tomato"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 09</span><img loading="lazy" decoding="async" src="letcho/12.jpeg" alt="Adding chopped tomato"></div></div>
         <div class="s-body"><span class="step-no">09</span><h3>Add the tomato</h3>
           <p>Stir the chopped tomato into the softened peppers.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Step 10</span><img src="letcho/13.jpeg" alt="Mixing the tomato through"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Step 10</span><img loading="lazy" decoding="async" src="letcho/13.jpeg" alt="Mixing the tomato through"></div></div>
         <div class="s-body"><span class="step-no">10</span><h3>Mix it through</h3>
           <p>Stir well so the tomato breaks down into the sauce.</p>
         </div>
       </article>
 
       <article class="step reveal">
-        <div class="s-media"><div class="frame"><span class="tag">Finish</span><img src="letcho/14.jpeg" alt="Finished lecsó in the pot"></div></div>
+        <div class="s-media"><div class="frame"><span class="tag">Finish</span><img loading="lazy" decoding="async" src="letcho/14.jpeg" alt="Finished lecsó in the pot"></div></div>
         <div class="s-body"><span class="step-no">11</span><h3>Cook until ready</h3>
           <p>Keep cooking until everything is soft, glossy and stewed together. Taste, adjust the salt, and serve.</p>
         </div>
@@ -501,6 +595,86 @@
     <div class="finish reveal">
       <div class="k">Make it a meal</div>
       <p>Crack in eggs at the end, or add sausage — but it's perfect with just bread, too.</p>
+    </div>
+  </section>
+
+  <!-- ============ POTATO DUMPLINGS ============ -->
+  <section class="recipe dark" id="dumpling">
+    <div class="r-head reveal">
+      <div>
+        <div class="index">Recipe № 03</div>
+        <h2>Potato<br><em>Dumplings</em></h2>
+      </div>
+      <div class="desc">
+        Pillowy boiled dumplings made from riced potato and flour, rolled by hand and dropped into salted water until they bob to the top. A hearty, comforting side or a meal of their own.
+        <div class="stats">
+          <div><b>≈ 45m</b><span>Total time</span></div>
+          <div><b>Boil</b><span>Method</span></div>
+          <div><b>6–7</b><span>Dumplings</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ingredients reveal">
+      <div class="lbl">What you'll need</div>
+      <div class="chips">
+        <span class="chip"><span class="pip"></span>Floury potatoes</span>
+        <span class="chip"><span class="pip"></span>Flour</span>
+        <span class="chip"><span class="pip"></span>Salt</span>
+      </div>
+    </div>
+
+    <div class="steps">
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 01</span><img loading="lazy" decoding="async" src="potato_dumpling/IMG_4547.jpeg" alt="Flour, a ricer and a colander laid out on the board"></div></div>
+        <div class="s-body"><span class="step-no">01</span><h3>Gather everything</h3>
+          <p>Cook and drain your floury potatoes, then set out the flour and salt — along with a potato ricer and a slotted colander for later. That's all it takes: just potato, flour and salt.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 02</span><img loading="lazy" decoding="async" src="potato_dumpling/IMG_4548.jpeg" alt="Riced potato beside a pile of flour"></div></div>
+        <div class="s-body"><span class="step-no">02</span><h3>Rice the potatoes</h3>
+          <p>Press the warm boiled potatoes through a ricer onto the board and let them cool a little. Pile the flour right alongside, ready to work in.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 03</span><img loading="lazy" decoding="async" src="potato_dumpling/IMG_4549.jpeg" alt="Salt being added to the riced potato"></div></div>
+        <div class="s-body"><span class="step-no">03</span><h3>Season with salt</h3>
+          <p>Season the riced potato with salt — no egg, no butter, nothing else. Potato, flour and salt are all this dumpling needs.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 04</span><img loading="lazy" decoding="async" src="potato_dumpling/IMG_4550.jpeg" alt="A smooth ball of dough on the board"></div></div>
+        <div class="s-body"><span class="step-no">04</span><h3>Knead the dough</h3>
+          <p>Gradually fold the flour into the potato and knead just until it comes together into a soft, smooth dough — don't overwork it or it turns tough.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 05</span><img loading="lazy" decoding="async" src="potato_dumpling/IMG_4551.jpeg" alt="Seven dumpling balls rolled and lined up"></div></div>
+        <div class="s-body"><span class="step-no">05</span><h3>Roll into balls</h3>
+          <p>With lightly floured hands, divide the dough and roll it into even, smooth balls.</p>
+          <div class="note"><b>Optional · fried variation</b>If you like, roll the dough out about 1 cm thick instead, cut it into small round discs (little biscuit- or scone-shaped rounds, <em>pogácsa</em> style), and fry them in a little oil until golden brown and cooked through — crisp outside, soft inside.</div>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Finish</span><img loading="lazy" decoding="async" src="potato_dumpling/IMG_4565.jpeg" alt="Dumplings boiling in a pot of water"></div></div>
+        <div class="s-body"><span class="step-no">06</span><h3>Boil until they float</h3>
+          <p>Lower the dumplings into a big pot of salted boiling water. They'll sink, then rise — once they float to the top, give them a few more minutes, then lift them out.</p>
+          <div class="note"><b>Tip</b>Lift them out as soon as they're done and serve straight away alongside the paprikash.</div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="finish reveal">
+      <div class="k">Best served</div>
+      <p>Warm, with plenty of that paprika sauce spooned over the top.</p>
     </div>
   </section>
 

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Paprika &amp; Patience — A Hungarian Home Kitchen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paprika:#c5341e;
+    --paprika-deep:#9a2414;
+    --ember:#e07a35;
+    --cream:#f6ecdb;
+    --cream-soft:#efe2cc;
+    --ink:#23150f;
+    --ink-soft:#5a463c;
+    --char:#1a0f0a;
+    --gold:#d8a44a;
+    --line:rgba(35,21,15,.14);
+    --shadow:28px 30px 60px -30px rgba(26,15,10,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Spectral",Georgia,serif;
+    background:var(--cream);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--paprika);color:var(--cream)}
+
+  /* paper grain */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:radial-gradient(rgba(35,21,15,.04) 1px,transparent 1px);
+    background-size:4px 4px;mix-blend-mode:multiply;opacity:.6;
+  }
+  .wrap{position:relative;z-index:1}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px clamp(20px,5vw,64px);
+    backdrop-filter:blur(8px);
+    background:linear-gradient(to bottom,rgba(246,236,219,.92),rgba(246,236,219,.6));
+    border-bottom:1px solid var(--line);
+  }
+  nav .brand{
+    font-family:"Fraunces",serif;font-weight:600;font-size:1.15rem;
+    letter-spacing:.02em;display:flex;align-items:center;gap:.55rem;
+  }
+  nav .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--paprika);box-shadow:0 0 0 4px rgba(197,52,30,.18)}
+  nav .links{display:flex;gap:clamp(14px,3vw,38px);font-size:.82rem;text-transform:uppercase;letter-spacing:.18em}
+  nav .links a{color:var(--ink-soft);text-decoration:none;position:relative;padding:4px 0;transition:color .25s}
+  nav .links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--paprika);transition:width .3s}
+  nav .links a:hover{color:var(--paprika)}
+  nav .links a:hover::after{width:100%}
+  @media(max-width:640px){nav .links a:not(.cta){display:none}}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    padding:120px clamp(20px,5vw,64px) 60px;position:relative;overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 85% 10%,rgba(224,122,53,.22),transparent 55%),
+      radial-gradient(90% 70% at 5% 95%,rgba(197,52,30,.14),transparent 60%),
+      var(--cream);
+  }
+  .hero .eyebrow{
+    font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:var(--paprika);
+    margin-bottom:1.6rem;display:flex;align-items:center;gap:1rem;
+  }
+  .hero .eyebrow::before{content:"";width:54px;height:1px;background:var(--paprika)}
+  .hero h1{
+    font-family:"Fraunces",serif;font-weight:300;
+    font-size:clamp(3.2rem,12vw,10.5rem);line-height:.9;letter-spacing:-.02em;
+    max-width:14ch;
+  }
+  .hero h1 em{font-style:italic;color:var(--paprika);font-weight:400}
+  .hero .lede{
+    margin-top:2rem;max-width:46ch;font-size:clamp(1.05rem,1.6vw,1.35rem);
+    line-height:1.65;color:var(--ink-soft);
+  }
+  .hero .scroll-cue{
+    margin-top:3.5rem;display:flex;gap:18px;flex-wrap:wrap;
+  }
+  .dish-link{
+    text-decoration:none;color:var(--ink);
+    border:1px solid var(--line);border-radius:2px;
+    padding:14px 22px 14px 18px;display:flex;align-items:center;gap:14px;
+    background:rgba(255,255,255,.35);transition:.3s;backdrop-filter:blur(4px);
+  }
+  .dish-link:hover{background:var(--ink);color:var(--cream);transform:translateY(-3px);box-shadow:var(--shadow)}
+  .dish-link .num{font-family:"Fraunces",serif;font-size:1.5rem;color:var(--paprika)}
+  .dish-link:hover .num{color:var(--ember)}
+  .dish-link .meta b{font-family:"Fraunces",serif;font-weight:500;font-size:1.05rem;display:block}
+  .dish-link .meta span{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+  .dish-link:hover .meta span{color:var(--cream-soft)}
+
+  .hero-tag{
+    position:absolute;right:clamp(20px,5vw,64px);top:50%;transform:translateY(-50%) rotate(90deg);
+    transform-origin:right center;font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--ink-soft);opacity:.5;
+  }
+  @media(max-width:900px){.hero-tag{display:none}}
+
+  /* ---------- SECTION SHELL ---------- */
+  .recipe{padding:clamp(70px,9vw,140px) clamp(20px,5vw,64px);position:relative}
+  .recipe.dark{background:var(--char);color:var(--cream)}
+  .recipe.dark{--line:rgba(246,236,219,.16);--ink:var(--cream);--ink-soft:#c6b29c}
+
+  .r-head{display:grid;grid-template-columns:1fr;gap:2rem;margin-bottom:clamp(48px,7vw,90px);max-width:1280px;margin-inline:auto}
+  @media(min-width:900px){.r-head{grid-template-columns:1.3fr .9fr;align-items:end}}
+  .r-head .index{font-family:"Fraunces",serif;font-size:clamp(1rem,2vw,1.2rem);color:var(--paprika);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem}
+  .r-head h2{font-family:"Fraunces",serif;font-weight:300;font-size:clamp(2.6rem,7vw,6rem);line-height:.92;letter-spacing:-.02em}
+  .r-head h2 em{font-style:italic;color:var(--paprika)}
+  .r-head .desc{font-size:1.08rem;line-height:1.7;color:var(--ink-soft)}
+  .r-head .desc .stats{display:flex;gap:26px;margin-top:1.4rem;flex-wrap:wrap}
+  .r-head .stats div{border-left:2px solid var(--paprika);padding-left:12px}
+  .r-head .stats b{font-family:"Fraunces",serif;font-size:1.3rem;display:block}
+  .r-head .stats span{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+
+  /* ingredients */
+  .ingredients{max-width:1280px;margin:0 auto clamp(50px,7vw,90px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 0}
+  .ingredients .lbl{font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--paprika);margin-bottom:18px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{
+    font-size:.92rem;padding:8px 16px;border:1px solid var(--line);border-radius:40px;
+    display:flex;align-items:center;gap:9px;transition:.25s;
+  }
+  .chip:hover{border-color:var(--paprika);transform:translateY(-2px)}
+  .chip .pip{width:7px;height:7px;border-radius:50%;background:var(--ember)}
+
+  /* steps */
+  .steps{max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(40px,6vw,90px)}
+  .step{
+    display:grid;grid-template-columns:1fr;gap:clamp(22px,3vw,56px);align-items:center;
+  }
+  @media(min-width:820px){
+    .step{grid-template-columns:1fr 1fr}
+    .step:nth-child(even) .s-media{order:2}
+  }
+  .s-media{position:relative}
+  .s-media .frame{
+    position:relative;border-radius:3px;overflow:hidden;box-shadow:var(--shadow);
+    aspect-ratio:4/3;background:#000;
+  }
+  .s-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.7,.2,1);filter:saturate(1.05)}
+  .step:hover .s-media img{transform:scale(1.05)}
+  .s-media .tag{
+    position:absolute;left:-10px;top:18px;background:var(--paprika);color:var(--cream);
+    font-family:"Fraunces",serif;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;
+    padding:7px 16px;box-shadow:6px 8px 18px -8px rgba(0,0,0,.5);
+  }
+  .s-media.dual{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .s-media.dual .frame{aspect-ratio:3/4}
+
+  .s-body{padding:6px clamp(0px,2vw,28px)}
+  .s-body .step-no{
+    font-family:"Fraunces",serif;font-weight:300;font-size:clamp(3rem,7vw,5.5rem);
+    line-height:1;color:var(--paprika);display:block;margin-bottom:.4rem;
+  }
+  .s-body h3{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.1;margin-bottom:1rem;letter-spacing:-.01em}
+  .s-body p{font-size:1.05rem;line-height:1.75;color:var(--ink-soft)}
+  .s-body .note{
+    margin-top:1.1rem;font-size:.92rem;font-style:italic;color:var(--ink);
+    border-left:2px solid var(--gold);padding-left:14px;
+  }
+  .s-body .note b{font-style:normal;color:var(--paprika);text-transform:uppercase;font-size:.7rem;letter-spacing:.18em;display:block;margin-bottom:3px}
+
+  /* finish banner */
+  .finish{max-width:1280px;margin:clamp(50px,7vw,90px) auto 0;text-align:center;padding-top:40px;border-top:1px solid var(--line)}
+  .finish .k{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:var(--paprika)}
+  .finish p{font-family:"Fraunces",serif;font-style:italic;font-weight:300;font-size:clamp(1.5rem,3.5vw,2.6rem);line-height:1.3;max-width:22ch;margin:1rem auto 0}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--char);color:var(--cream-soft);padding:clamp(60px,8vw,110px) clamp(20px,5vw,64px) 50px;
+    text-align:center;
+  }
+  footer .big{font-family:"Fraunces",serif;font-weight:300;font-size:clamp(2rem,6vw,4.5rem);line-height:1;letter-spacing:-.02em}
+  footer .big em{font-style:italic;color:var(--paprika)}
+  footer .sub{margin-top:1.6rem;color:#9c8674;font-size:.95rem;letter-spacing:.04em}
+  footer .rule{width:60px;height:1px;background:var(--paprika);margin:2.4rem auto}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <div class="brand"><span class="dot"></span>Paprika&nbsp;&amp;&nbsp;Patience</div>
+    <div class="links">
+      <a href="#paprikash">Chicken Paprikash</a>
+      <a href="#letcho">Lecsó</a>
+      <a class="cta" href="#paprikash">Start Cooking →</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-tag">Hungarian Home Cooking · Est. Grandma</div>
+    <div class="eyebrow">Two dishes · One red spice</div>
+    <h1>Slow heat,<br>sweet <em>paprika</em>,<br>no rush.</h1>
+    <p class="lede">A small kitchen, a wooden board, a spoonful of Hungarian red paprika folded in off the heat so it never burns. Here are two everyday classics — built step by step, photographed exactly as they were cooked.</p>
+    <div class="scroll-cue">
+      <a class="dish-link" href="#paprikash">
+        <span class="num">01</span>
+        <span class="meta"><b>Chicken Paprikash</b><span>Slow-braised · sour cream</span></span>
+      </a>
+      <a class="dish-link" href="#letcho">
+        <span class="num">02</span>
+        <span class="meta"><b>Lecsó</b><span>Peppers · tomato · onion</span></span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ============ CHICKEN PAPRIKASH ============ -->
+  <section class="recipe dark" id="paprikash">
+    <div class="r-head reveal">
+      <div>
+        <div class="index">Recipe № 01</div>
+        <h2>Chicken<br><em>Paprikash</em></h2>
+      </div>
+      <div class="desc">
+        The Sunday classic: onions melted in fat, a fast swirl of red paprika, chicken legs braised slow, then finished with a silky flour-and-sour-cream temper.
+        <div class="stats">
+          <div><b>≈ 1h 40m</b><span>Total time</span></div>
+          <div><b>Braise</b><span>Method</span></div>
+          <div><b>Sour cream</b><span>Finish</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ingredients reveal">
+      <div class="lbl">What you'll need</div>
+      <div class="chips">
+        <span class="chip"><span class="pip"></span>Onion</span>
+        <span class="chip"><span class="pip"></span>Chicken legs</span>
+        <span class="chip"><span class="pip"></span>Garlic</span>
+        <span class="chip"><span class="pip"></span>Salt</span>
+        <span class="chip"><span class="pip"></span>Black pepper</span>
+        <span class="chip"><span class="pip"></span>Flour</span>
+        <span class="chip"><span class="pip"></span>Sour cream</span>
+        <span class="chip"><span class="pip"></span>Water</span>
+        <span class="chip"><span class="pip"></span>Hungarian red paprika</span>
+        <span class="chip"><span class="pip"></span>Pork fat (lard)</span>
+      </div>
+    </div>
+
+    <div class="steps">
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 01</span><img src="chicken_paprikash/1.jpeg" alt="Chopped onion on a wooden board"></div></div>
+        <div class="s-body"><span class="step-no">01</span><h3>Chop the onion</h3>
+          <p>Finely chop a good amount of onion — it's the backbone of the whole sauce. Don't be shy with it.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 02</span><img src="chicken_paprikash/2.jpeg" alt="Separating the drumstick from the thigh"></div></div>
+        <div class="s-body"><span class="step-no">02</span><h3>Joint the chicken legs</h3>
+          <p>Separate the lower drumstick from the upper thigh at the joint. Cutting them apart helps the pieces cook evenly and fit the pan.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 03</span><img src="chicken_paprikash/5.jpeg" alt="Onions heating in pork fat in a large pot"></div></div>
+        <div class="s-body"><span class="step-no">03</span><h3>Sweat onion in pork fat</h3>
+          <p>Start heating the chopped onion with a spoon of pork fat in a big pot over medium heat. Let it soften slowly until glassy and translucent.</p>
+          <div class="note"><b>Optional</b>Toss in 1–2 chopped garlic cloves with the onion for extra depth.</div>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 04</span><img src="chicken_paprikash/6.jpeg" alt="Adding red paprika to glassy onions"></div></div>
+        <div class="s-body"><span class="step-no">04</span><h3>Add the paprika — off the boil</h3>
+          <p>Once the onion turns glassy, drop the heat to low and add a tablespoon of Hungarian red paprika.</p>
+          <div class="note"><b>Why low heat</b>Paprika scorches in seconds, and burnt paprika turns the whole dish bitter.</div>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 05</span><img src="chicken_paprikash/10.jpeg" alt="Mixing the paprika into the onions quickly"></div></div>
+        <div class="s-body"><span class="step-no">05</span><h3>Stir it in, fast</h3>
+          <p>Mix the paprika through the onions quickly so it coats everything and blooms into the fat without catching.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 06</span><img src="chicken_paprikash/12.jpeg" alt="Adding chicken legs to the pot"></div></div>
+        <div class="s-body"><span class="step-no">06</span><h3>Add the chicken legs</h3>
+          <p>Nestle the jointed chicken pieces into the paprika-onion base, turning them to coat in the deep red color.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 07</span><img src="chicken_paprikash/13.jpeg" alt="Adding black pepper"></div></div>
+        <div class="s-body"><span class="step-no">07</span><h3>Season with pepper</h3>
+          <p>Grind black pepper over the chicken to taste.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 08</span><img src="chicken_paprikash/14.jpeg" alt="Adding a tablespoon of salt"></div></div>
+        <div class="s-body"><span class="step-no">08</span><h3>Then the salt</h3>
+          <p>Add about a tablespoon of salt — adjust later once the sauce reduces.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 09</span><img src="chicken_paprikash/15.jpeg" alt="Pouring water into the pot"></div></div>
+        <div class="s-body"><span class="step-no">09</span><h3>Pour in the water</h3>
+          <p>Add 1½ cups of water. It will loosen the paprika base into the braising liquid that becomes your sauce.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 10</span><img src="chicken_paprikash/16.jpeg" alt="Pot covered to simmer"></div></div>
+        <div class="s-body"><span class="step-no">10</span><h3>Cover &amp; braise low</h3>
+          <p>Put the lid on and let it cook gently for about 1 hour 20 minutes.</p>
+          <div class="note"><b>Doneness</b>Test with a fork — the meat should be fork-tender and nearly falling off the bone.</div>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 11</span><img src="chicken_paprikash/17.jpeg" alt="Two tablespoons of flour in a bowl"></div></div>
+        <div class="s-body"><span class="step-no">11</span><h3>Start the thickener</h3>
+          <p>In a separate bowl, measure out 2 tablespoons of flour.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 12</span><img src="chicken_paprikash/18.jpeg" alt="Adding sour cream to the flour"></div></div>
+        <div class="s-body"><span class="step-no">12</span><h3>Add the sour cream</h3>
+          <p>Stir 4 tablespoons of sour cream into the flour.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media dual">
+          <div class="frame"><span class="tag">12·a</span><img src="chicken_paprikash/19.jpeg" alt="Adding a little water to the mix"></div>
+          <div class="frame"><img src="chicken_paprikash/19.1.jpeg" alt="Mixing the flour and sour cream smooth"></div>
+        </div>
+        <div class="s-body"><span class="step-no">13</span><h3>Loosen &amp; mix smooth</h3>
+          <p>Splash in a little water, then whisk the flour and sour cream until completely smooth with no lumps.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media dual">
+          <div class="frame"><span class="tag">Temper</span><img src="chicken_paprikash/20.jpeg" alt="Ladling hot sauce from the pan"></div>
+          <div class="frame"><img src="chicken_paprikash/22.jpeg" alt="Adding hot sauce into the sour cream mix"></div>
+        </div>
+        <div class="s-body"><span class="step-no">14</span><h3>Temper it with the hot sauce</h3>
+          <p>Ladle about 1½ cups of the hot chicken sauce from the pan into the flour–sour cream mix. Warming it gently this way stops the cream from splitting.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 15</span><img src="chicken_paprikash/23.jpeg" alt="Mixing the tempered sour cream"></div></div>
+        <div class="s-body"><span class="step-no">15</span><h3>Whisk until silky</h3>
+          <p>Mix it well until the tempered cream is smooth and warm to the touch.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Finish</span><img src="chicken_paprikash/25.jpeg" alt="Finished chicken paprikash with sour cream sauce"></div></div>
+        <div class="s-body"><span class="step-no">16</span><h3>Return, boil, done</h3>
+          <p>Pour the cream back into the pot and stir it through the chicken sauce. Let it boil for 4–5 minutes to thicken — and that's it, dinner's ready.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="finish reveal">
+      <div class="k">Serve it with</div>
+      <p>Nokedli, fresh bread, or a spoon of rice to catch every drop of that red sauce.</p>
+    </div>
+  </section>
+
+  <!-- ============ LECSÓ ============ -->
+  <section class="recipe" id="letcho">
+    <div class="r-head reveal">
+      <div>
+        <div class="index">Recipe № 02</div>
+        <h2><em>Lecsó</em></h2>
+      </div>
+      <div class="desc">
+        Summer in a pot: sweet peppers, onion and tomato stewed down with paprika until jammy and soft. Humble, vegetarian, and endlessly adaptable.
+        <div class="stats">
+          <div><b>≈ 50m</b><span>Total time</span></div>
+          <div><b>Stew</b><span>Method</span></div>
+          <div><b>Meat-free</b><span>As-is</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ingredients reveal">
+      <div class="lbl">What you'll need</div>
+      <div class="chips">
+        <span class="chip"><span class="pip"></span>Onion</span>
+        <span class="chip"><span class="pip"></span>Paprika peppers</span>
+        <span class="chip"><span class="pip"></span>Tomato</span>
+        <span class="chip"><span class="pip"></span>Salt</span>
+        <span class="chip"><span class="pip"></span>Black pepper</span>
+        <span class="chip"><span class="pip"></span>Hungarian red paprika</span>
+        <span class="chip"><span class="pip"></span>Fat (lard or oil)</span>
+      </div>
+    </div>
+
+    <div class="steps">
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 01</span><img src="letcho/1.jpeg" alt="Chopped onion on a board"></div></div>
+        <div class="s-body"><span class="step-no">01</span><h3>Chop the onion</h3>
+          <p>Same start as always — chop the onion. It melts down into the sweet base of the stew.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 02</span><img src="letcho/3.jpeg" alt="Chopped peppers"></div></div>
+        <div class="s-body"><span class="step-no">02</span><h3>Chop the peppers</h3>
+          <p>Slice the peppers into strips or chunks.</p>
+          <div class="note"><b>Pepper note</b>Try to avoid bell pepper — it tastes noticeably different. Sweet Hungarian (wax) peppers are the real thing here.</div>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 03</span><img src="letcho/4.jpeg" alt="Chopped tomato"></div></div>
+        <div class="s-body"><span class="step-no">03</span><h3>Chop the tomato</h3>
+          <p>Roughly chop the tomato and set it aside — it goes in near the end.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 04</span><img src="letcho/5.jpeg" alt="Onion sweating in fat"></div></div>
+        <div class="s-body"><span class="step-no">04</span><h3>Sweat the onion</h3>
+          <p>Heat the chopped onion with fat until it turns soft and glassy.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 05</span><img src="letcho/7.jpeg" alt="Adding red paprika"></div></div>
+        <div class="s-body"><span class="step-no">05</span><h3>Bloom the paprika</h3>
+          <p>Add a tablespoon of Hungarian red paprika to the onion.</p>
+          <div class="note"><b>Low heat</b>Keep the flame low — paprika burns fast and turns bitter.</div>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 06</span><img src="letcho/8.jpeg" alt="Adding chopped peppers to the pot"></div></div>
+        <div class="s-body"><span class="step-no">06</span><h3>Add the peppers</h3>
+          <p>Tip in the chopped peppers and turn them through the paprika onion.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 07</span><img src="letcho/9.jpeg" alt="Adding black pepper"></div></div>
+        <div class="s-body"><span class="step-no">07</span><h3>Season with pepper</h3>
+          <p>Add black pepper to taste (and a pinch of salt if you like).</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 08</span><img src="letcho/10.jpeg" alt="Peppers cooking covered"></div></div>
+        <div class="s-body"><span class="step-no">08</span><h3>Cover &amp; soften</h3>
+          <p>Stir, put the lid on, and cook for 20–30 minutes until the peppers go soft and start to collapse.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 09</span><img src="letcho/12.jpeg" alt="Adding chopped tomato"></div></div>
+        <div class="s-body"><span class="step-no">09</span><h3>Add the tomato</h3>
+          <p>Stir the chopped tomato into the softened peppers.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Step 10</span><img src="letcho/13.jpeg" alt="Mixing the tomato through"></div></div>
+        <div class="s-body"><span class="step-no">10</span><h3>Mix it through</h3>
+          <p>Stir well so the tomato breaks down into the sauce.</p>
+        </div>
+      </article>
+
+      <article class="step reveal">
+        <div class="s-media"><div class="frame"><span class="tag">Finish</span><img src="letcho/14.jpeg" alt="Finished lecsó in the pot"></div></div>
+        <div class="s-body"><span class="step-no">11</span><h3>Cook until ready</h3>
+          <p>Keep cooking until everything is soft, glossy and stewed together. Taste, adjust the salt, and serve.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="finish reveal">
+      <div class="k">Make it a meal</div>
+      <p>Crack in eggs at the end, or add sausage — but it's perfect with just bread, too.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="big">Cook slow.<br>Stir with <em>love</em>.</div>
+    <div class="rule"></div>
+    <div class="sub">Paprika &amp; Patience · A Hungarian home kitchen · Photographed step by step</div>
+  </footer>
+
+</div>
+
+<script>
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{threshold:.12,rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -190,11 +190,12 @@
   }
   .s-body h3{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.1;margin-bottom:1rem;letter-spacing:-.01em}
   .s-body p{font-size:1.05rem;line-height:1.75;color:var(--ink-soft)}
-  .s-body .note{
+  .s-body .note,.side-method .note{
     margin-top:1.1rem;font-size:.92rem;font-style:italic;color:var(--ink);
     border-left:2px solid var(--gold);padding-left:14px;
   }
-  .s-body .note b{font-style:normal;color:var(--paprika);text-transform:uppercase;font-size:.7rem;letter-spacing:.18em;display:block;margin-bottom:3px}
+  .side-method .note{margin-top:1.6rem}
+  .s-body .note b,.side-method .note b{font-style:normal;color:var(--paprika);text-transform:uppercase;font-size:.7rem;letter-spacing:.18em;display:block;margin-bottom:3px}
 
   /* finish banner */
   .finish{max-width:1280px;margin:clamp(50px,7vw,90px) auto 0;text-align:center;padding-top:40px;border-top:1px solid var(--line)}
@@ -235,6 +236,12 @@
     font-family:"Fraunces",serif;font-size:1.05rem;color:var(--cream);background:var(--paprika);
   }
   .side-method li b{color:var(--ink);font-weight:500}
+  .side-card + .side-card{margin-top:clamp(28px,4vw,48px)}
+  .side-card.variant::before{background:var(--green)}
+  .side-card.variant .side-method li::before{background:var(--green)}
+  .side-head .serves + .serves{margin-left:8px}
+  .side-head .source{margin-top:.9rem;font-size:.88rem;font-style:italic}
+  .side-head .source a{color:inherit;text-decoration-color:var(--paprika);text-underline-offset:4px}
 
   /* ---------- FOOTER ---------- */
   footer{
@@ -306,15 +313,16 @@
       <a href="#nokedli">Nokedli</a>
       <a href="#letcho">Lecsó</a>
       <a href="#dumpling">Dumplings</a>
+      <a href="#krumplis">Krumplis Tészta</a>
       <a class="cta" href="#paprikash">Start Cooking →</a>
     </div>
   </nav>
 
   <header class="hero">
     <div class="hero-tag">Hungarian Home Cooking · Est. Grandma</div>
-    <div class="eyebrow">Three dishes · one good side</div>
+    <div class="eyebrow">Four dishes · one good side</div>
     <h1>Slow heat,<br>sweet <em>paprika</em>,<br>no rush.</h1>
-    <p class="lede">A small kitchen, a wooden board, a spoonful of Hungarian red paprika folded in off the heat so it never burns. Three everyday classics — plus the soft little dumplings that go with them — built step by step, photographed exactly as they were cooked.</p>
+    <p class="lede">A small kitchen, a wooden board, a spoonful of Hungarian red paprika folded in off the heat so it never burns. Four everyday classics — plus the soft little dumplings that go with them — built step by step, photographed exactly as they were cooked.</p>
     <div class="folk-divider" aria-hidden="true"><svg viewBox="0 0 280 60"><use href="#folk"/></svg></div>
     <div class="scroll-cue">
       <a class="dish-link" href="#paprikash">
@@ -328,6 +336,10 @@
       <a class="dish-link" href="#dumpling">
         <span class="num">03</span>
         <span class="meta"><b>Potato Dumplings</b><span>Riced potato · boiled</span></span>
+      </a>
+      <a class="dish-link" href="#krumplis">
+        <span class="num">04</span>
+        <span class="meta"><b>Krumplis Tészta</b><span>Potatoes · pasta · lard</span></span>
       </a>
       <a class="dish-link" href="#nokedli">
         <span class="num">+</span>
@@ -740,6 +752,81 @@
     <div class="finish reveal">
       <div class="k">Best served</div>
       <p>Warm, with plenty of that paprika sauce spooned over the top.</p>
+    </div>
+  </section>
+
+  <!-- ============ KRUMPLIS TÉSZTA ============ -->
+  <section class="recipe side" id="krumplis">
+    <div class="side-card reveal">
+      <div class="side-head">
+        <div class="folk-divider" aria-hidden="true"><svg viewBox="0 0 280 60"><use href="#folk"/></svg></div>
+        <div class="index">Recipe № 04 · Potatoes &amp; pasta</div>
+        <h2>Krumplis<br><em>Tészta</em></h2>
+        <p>Pasta tossed with riced potato in paprika-red lard — cheap, filling and pure Hungarian comfort. The secret is the onion: fried until properly golden brown, not just softened, so it carries the whole dish. Lard only, no oil. No photos for this one yet, so here's the recipe in full.</p>
+        <span class="serves">Serves 5</span><span class="serves">≈ 40 min</span>
+        <p class="source">Adapted from <a href="https://www.nosalty.hu/recept/tokeletes-krumplis-teszta-ahogy-mi-szeretjuk" target="_blank" rel="noopener">“Tökéletes krumplis tészta – ahogy mi szeretjük” by Walaky on Nosalty</a></p>
+      </div>
+      <div class="side-grid">
+        <div class="side-ing">
+          <div class="lbl">Ingredients</div>
+          <ul>
+            <li>Potatoes <span>1 kg</span></li>
+            <li>Onions <span>3 large</span></li>
+            <li>Pork fat (lard) <span>5 tbsp</span></li>
+            <li>Hungarian red paprika <span>2 tsp</span></li>
+            <li>Ground black pepper <span>to taste</span></li>
+            <li>Salt <span>to taste</span></li>
+            <li>Pasta · large squares <span>400 g</span></li>
+          </ul>
+        </div>
+        <div class="side-method">
+          <div class="lbl">Method</div>
+          <ol>
+            <li><b>Prep.</b> Peel and chop the potatoes into a pot, cover with cold water and salt it. Peel and finely dice the onions.</li>
+            <li><b>Boil potatoes &amp; pasta.</b> Cook the potatoes until soft, and at the same time boil the pasta in salted water according to the packet. Drain both.</li>
+            <li><b>Fry the onion.</b> Meanwhile, melt the lard in a wide, heavy pot, add the onion with a pinch of salt and fry it until golden brown — really fry it, don't just sweat it. This is where the flavor comes from.</li>
+            <li><b>Paprika &amp; pepper.</b> Take the pot off the heat and sprinkle in the paprika and black pepper. A heavy pot keeps cooking, so don't let the paprika burn.</li>
+            <li><b>Coat the pasta.</b> Tip the drained pasta onto the onions and stir until every piece is glossy with the red, oniony fat.</li>
+            <li><b>Rice the potatoes over it.</b> Press the hot potatoes through a ricer straight onto the pasta, then fold patiently until the potato is spread evenly throughout.</li>
+            <li><b>Rest &amp; serve.</b> Cover and let it stand a few minutes (it stays hot), stir once more, check the salt and serve.</li>
+          </ol>
+          <div class="note"><b>Serve it with</b>Sour pickled cucumbers — nothing goes better. Leftovers crisped up in a non-stick pan the next day are even better.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-card variant reveal">
+      <div class="side-head">
+        <div class="index">The simplified version · one pan</div>
+        <h2>Quick <em>Krumplis Tészta</em></h2>
+        <p>The weeknight shortcut: no separate potato pot and no ricer. Tiny potato cubes steam soft right in the paprika onion, then get lightly crushed into the pasta.</p>
+        <span class="serves">Serves 4</span><span class="serves">≈ 60 min</span>
+        <p class="source">Adapted from <a href="https://www.mindmegette.hu/recept/egyszeru-krumplisteszta" target="_blank" rel="noopener">“Egyszerű krumplis tészta” by Rozsnyai Gabriella on Mindmegette</a></p>
+      </div>
+      <div class="side-grid">
+        <div class="side-ing">
+          <div class="lbl">Ingredients</div>
+          <ul>
+            <li>Onion <span>1</span></li>
+            <li>Oil <span>100 ml</span></li>
+            <li>Hungarian red paprika <span>1 tsp</span></li>
+            <li>Potatoes <span>500 g</span></li>
+            <li>Salt &amp; black pepper <span>to taste</span></li>
+            <li>Water <span>~50 ml</span></li>
+            <li>Pasta · frilly or squares <span>500 g</span></li>
+          </ul>
+        </div>
+        <div class="side-method">
+          <div class="lbl">Method</div>
+          <ol>
+            <li><b>Onion &amp; paprika.</b> Fry the chopped onion in hot oil in a large skillet, then pull it off the heat and sprinkle with the paprika.</li>
+            <li><b>Steam the potatoes.</b> Add the peeled potatoes cut into small cubes, season with salt and pepper and pour in about 50 ml water. Cover and cook on low, stirring now and then, until soft.</li>
+            <li><b>Boil the pasta.</b> Meanwhile, cook the pasta in plenty of salted water according to the packet, then drain.</li>
+            <li><b>Crush &amp; combine.</b> Lightly crush the soft potatoes in the pan, mix in the pasta and adjust the salt and pepper.</li>
+          </ol>
+          <div class="note"><b>Tip</b>The smaller you dice the potatoes, the faster they soften — that's what lets you skip boiling them separately.</div>
+        </div>
+      </div>
     </div>
   </section>
 
